@@ -14,20 +14,24 @@ var words = [
 
 //GLOBAL VARIABLES
 
-var wordToGuess = document.getElementById(word-to-guess)
-var previousWord = document.getElementById(previous-word)
-var incorrectLetters = document.getElementById(incorrect-letters)
-var remainingGuesses = document.getElementById(remaining-guesses)
+//var wordToGuess = document.getElementById(word-to-guess)
+//var previousWord = document.getElementById(previous-word)
+//var incorrectLetters = document.getElementById(incorrect-letters)
+//var remainingGuesses = document.getElementById(remaining-guesses)
 
-var wins = document.getElementById(wins)
-var losses = document.getElementById(losses)
+//var wins = document.getElementById(wins)
+//var losses = document.getElementById(losses)
 
-document.onkeyup = function(e) {
+document.onkeyup = function() {
   //filter key presses
-  
-  console.log(e.key) //access user key press(es)
+
+  //console.log(key) //access user key press(es)
 
   //pick random word from array
+  var wordAtPlay = words[Math.floor(Math.random() * words.length)]
+  console.log(wordAtPlay)
+
+  //display number of underscores
 
   //compare picked word and letter + guesses
 
