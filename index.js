@@ -17,7 +17,6 @@ var words = [
 //GLOBAL VARIABLES
 
 //var previousWord = document.getElementById(previous-word)
-//var incorrectLetters = document.getElementById(incorrect-letters)
 
 //var wins = document.getElementById(wins)
 //var losses = document.getElementById(losses)
@@ -26,6 +25,7 @@ var words = [
   var wordToGuess = document.querySelector('#word-to-guess')
 
   var wordAtPlay = words[Math.floor(Math.random() * words.length)] //SELECTS RANDOM WORD
+  console.log(wordAtPlay)
 
   var answerArray = [] //PLACE TO HOLD UNDERSCORES
   for (var i = 0; i < wordAtPlay.length; i++) { //REVIEWS LETTERS
@@ -38,14 +38,37 @@ var words = [
 
   remainingGuesses.innerHTML = 10
 
-document.onkeyup = function() {
-  //filter key presses?
 
-  //console.log(key) //access user key press(es)
+var incorrectLetters = document.querySelector('#incorrect-letters')
 
-  //display number of underscores
+document.onkeyup = function(e) {
+  var key = e.key.toLowerCase()
   
   //compare picked word and letter + guesses
+  
+  console.log(key)
+  incorrectArray = []
+
+  var remainingLetters = wordAtPlay.length
+  console.log(remainingLetters)
+  
+
+    for (var i = 0; i < wordAtPlay.length; i++) {
+      if (wordAtPlay[i] === key){
+        console.log("bitch")
+        answerArray[i] = key
+        wordToGuess.textContent = answerArray.join("")
+      } else if (wordAtPlay[i] !== key) {
+        //console.log("lol")
+        //incorrectArray.push(key)
+        //console.log(incorrectArray)
+        //incorrectLetters.textContent = incorrectArray.join(", ")
+        
+        remainingGuesses--
+      }
+      
+    }
+  
 
   //wins and losses
 
