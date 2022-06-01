@@ -12,17 +12,18 @@ var words = [
   'mango'
 ]
 
+// https://nostarch.com/download/JS4K_ch7.pdf
+
 //GLOBAL VARIABLES
 
-var wordToGuess = document.querySelector('#word-to-guess')
 //var previousWord = document.getElementById(previous-word)
 //var incorrectLetters = document.getElementById(incorrect-letters)
-//var remainingGuesses = document.getElementById(remaining-guesses)
 
 //var wins = document.getElementById(wins)
 //var losses = document.getElementById(losses)
 
-  //PICKING RANDOM WORD AND REPLACING W UNDERSCORE
+//PICKING RANDOM WORD AND REPLACING W UNDERSCORE
+  var wordToGuess = document.querySelector('#word-to-guess')
 
   var wordAtPlay = words[Math.floor(Math.random() * words.length)] //SELECTS RANDOM WORD
 
@@ -31,6 +32,11 @@ var wordToGuess = document.querySelector('#word-to-guess')
     answerArray[i] = "_"
   }
   wordToGuess.textContent = answerArray.join("")
+
+//GUESSES REMAINING SET UP
+  var remainingGuesses = document.querySelector('#remaining-guesses')
+
+  remainingGuesses.innerHTML = 10
 
 document.onkeyup = function() {
   //filter key presses?
