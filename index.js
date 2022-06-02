@@ -16,10 +16,14 @@ var words = [
 
 //GLOBAL VARIABLES
 
-//var previousWord = document.getElementById(previous-word)
+var previousWordEl = document.querySelector('#previous-word')
+var incorrectArray = []
 
-//var wins = document.getElementById(wins)
-//var losses = document.getElementById(losses)
+var winsEl = document.getElementById(wins)
+var lossesEl = document.getElementById(losses)
+
+var wins = 0
+var losses = 0
 
 //PICKING RANDOM WORD AND REPLACING W UNDERSCORE
   var wordToGuess = document.querySelector('#word-to-guess')
@@ -36,45 +40,46 @@ var words = [
 //GUESSES REMAINING SET UP
   var remainingGuesses = document.querySelector('#remaining-guesses')
 
-  var guessCount = 10
 
-  remainingGuesses.innerHTML = guessCount
+    var guessCount = 10
 
+    remainingGuesses.innerHTML = guessCount
+  
+  var incorrectLettersEl = document.querySelector('#incorrect-letters')
 
-var incorrectLetters = document.querySelector('#incorrect-letters')
-
-incorrectArray = []
 
 document.onkeyup = function(e) {
-  var key = e.key.toLowerCase()
-  //compare picked word and letter + guesses
-  console.log(key)
   
+  var key = e.key.toLowerCase()
 
-    for (var i = 0; i < wordAtPlay.length; i++) {
+  if (wordAtPlay.includes(key)){
+    console.log("yep")
+    for (let i = 0; i < wordAtPlay.length; i++) {
       if (wordAtPlay[i] === key){
         answerArray[i] = key
-        wordToGuess.textContent = answerArray.join("")
-        
-      } //else if (wordAtPlay[i] !== key) {
-        //console.log("bad gaga")
-        //incorrectArray.push(key)
-        //incorrectLetters.textContent = incorrectArray.join(", ")
-        
-        //guessCount--
+        wordToGuess.textContent = answerArray.join('')
       }
-      
+      }
+    } else {
+      console.log("nope");
+      incorrectArray.push(key)
+      guessCount--
+      incorrectLettersEl.textContent = incorrectArray
+      remainingGuesses.textContent = guessCount
     }
+    console.log(key)
+}
+ 
 
-    for (var w = 0; w < incorrectArray.length; w++) {
-      if (wordAtPlay[i] !== key){
-        incorrectArray.push(key)
-        incorrectLetters.textContent = incorrectArray.join(", ")
-      }
-      
-    }
+
   
 
-  //wins and losses
 
-  //show previous guesses, correct and incorrect
+
+
+//wins and losses
+
+//show previous word
+previousWordEl.textContent = wordAtPlay
+
+//correct and incorrect
