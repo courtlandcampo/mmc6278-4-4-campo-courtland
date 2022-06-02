@@ -36,35 +36,40 @@ var words = [
 //GUESSES REMAINING SET UP
   var remainingGuesses = document.querySelector('#remaining-guesses')
 
-  remainingGuesses.innerHTML = 10
+  var guessCount = 10
+
+  remainingGuesses.innerHTML = guessCount
 
 
 var incorrectLetters = document.querySelector('#incorrect-letters')
 
+incorrectArray = []
+
 document.onkeyup = function(e) {
   var key = e.key.toLowerCase()
-  
   //compare picked word and letter + guesses
-  
   console.log(key)
-  incorrectArray = []
-
-  var remainingLetters = wordAtPlay.length
-  console.log(remainingLetters)
   
 
     for (var i = 0; i < wordAtPlay.length; i++) {
       if (wordAtPlay[i] === key){
-        console.log("bitch")
         answerArray[i] = key
         wordToGuess.textContent = answerArray.join("")
-      } else if (wordAtPlay[i] !== key) {
-        //console.log("lol")
+        
+      } //else if (wordAtPlay[i] !== key) {
+        //console.log("bad gaga")
         //incorrectArray.push(key)
-        //console.log(incorrectArray)
         //incorrectLetters.textContent = incorrectArray.join(", ")
         
-        remainingGuesses--
+        //guessCount--
+      }
+      
+    }
+
+    for (var w = 0; w < incorrectArray.length; w++) {
+      if (wordAtPlay[i] !== key){
+        incorrectArray.push(key)
+        incorrectLetters.textContent = incorrectArray.join(", ")
       }
       
     }
@@ -73,4 +78,3 @@ document.onkeyup = function(e) {
   //wins and losses
 
   //show previous guesses, correct and incorrect
-}
