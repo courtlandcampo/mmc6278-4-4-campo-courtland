@@ -62,6 +62,9 @@ function newGame () {
   var guessCount = 10 //working
   remainingGuesses.textContent = guessCount //working
   incorrectLettersEl.innerHTML = "" //working
+
+  previousWordEl.textContent = wordToGuess.textContent
+  
   var wordAtPlay = words[Math.floor(Math.random() * words.length)] //re-SELECTS RANDOM WORD
   console.log(wordAtPlay)
 
@@ -71,6 +74,8 @@ function newGame () {
   }
   wordToGuess.textContent = answerArray.join("")
 
+
+  // COPY AND PASTE ORIGINAL GAME CODE 
   document.onkeyup = function game(play) {
     var key = play.key.toLowerCase() //convert keys to lowercase
   
@@ -83,10 +88,10 @@ function newGame () {
         }
         }
       } else {
-        incorrectArray.push(key) //add incorrect letters to array
-        guessCount-- //reduce number of guesses
-        incorrectLettersEl.textContent = incorrectArray //publish letters to site
-        remainingGuesses.textContent = guessCount //publish guesses remaining to site
+      incorrectArray.push(key) //add incorrect letters to array
+      guessCount-- //reduce number of guesses
+      incorrectLettersEl.textContent = incorrectArray.join(', ') //publish letters to site
+      remainingGuesses.textContent = guessCount //publish guesses remaining to site
       }
       console.log(answerArray.join(''), wordAtPlay)
       
@@ -126,7 +131,7 @@ document.onkeyup = function game(play) {
     } else {
       incorrectArray.push(key) //add incorrect letters to array
       guessCount-- //reduce number of guesses
-      incorrectLettersEl.textContent = incorrectArray //publish letters to site
+      incorrectLettersEl.textContent = incorrectArray.join(', ') //publish letters to site
       remainingGuesses.textContent = guessCount //publish guesses remaining to site
     }
     console.log(answerArray.join(''), wordAtPlay)
