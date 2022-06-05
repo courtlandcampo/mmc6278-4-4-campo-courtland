@@ -19,11 +19,18 @@ var words = [
 var previousWordEl = document.querySelector('#previous-word')
 var incorrectArray = []
 
-var winsEl = document.getElementById(wins)
-var lossesEl = document.getElementById(losses)
-
 var wins = 0
 var losses = 0
+
+var winsEl = document.querySelector('#wins')
+winsEl.textContent = wins
+
+var lossesEl = document.querySelector('#losses')
+lossesEl.textContent = losses
+
+
+
+var victory = false
 
 //PICKING RANDOM WORD AND REPLACING W UNDERSCORE
   var wordToGuess = document.querySelector('#word-to-guess')
@@ -42,44 +49,66 @@ var losses = 0
 
 
     var guessCount = 10
+    var correctGuesses = 0
 
     remainingGuesses.innerHTML = guessCount
   
   var incorrectLettersEl = document.querySelector('#incorrect-letters')
 
 
-document.onkeyup = function(e) {
-  
-  var key = e.key.toLowerCase()
+// GAME RESET
+function reset () {
+  console.log("reset ready")
+  var guessCount = 10
+  remainingGuesses.innerHTML = guessCount
+  answerArray = []
+  incorrectLettersEl.innerHTML = ""
+  remainingGuesses = 10
+  Math.random()
+}
+
+// BASIC GAME STRUCTURE
+document.onkeyup = function(play) {
+  var key = play.key.toLowerCase() //convert keys to lowercase
 
   if (wordAtPlay.includes(key)){
-    console.log("yep")
     for (let i = 0; i < wordAtPlay.length; i++) {
       if (wordAtPlay[i] === key){
-        answerArray[i] = key
-        wordToGuess.textContent = answerArray.join('')
+        answerArray[i] = key 
+        wordToGuess.textContent = answerArray.join('') //replace blank w correct letter
+
+        correctGuesses++
       }
       }
     } else {
-      console.log("nope");
-      incorrectArray.push(key)
-      guessCount--
-      incorrectLettersEl.textContent = incorrectArray
-      remainingGuesses.textContent = guessCount
+      incorrectArray.push(key) //add incorrect letters to array
+      guessCount-- //reduce number of guesses
+      incorrectLettersEl.textContent = incorrectArray //publish letters to site
+      remainingGuesses.textContent = guessCount //publish guesses remaining to site
     }
-    console.log(key)
+    console.log(answerArray.join(''), wordAtPlay)
+    
+   
+    if (answerArray.join('') === wordAtPlay){
+    console.log("now what did you do?")
+
+    wins++
+    winsEl.textContent = wins
+    }
+
+    if (answerArray.join('') !== wordAtPlay && guessCount < 1) {
+    console.log("haha loser")
+
+    losses++
+    lossesEl.textContent = losses
+    }
 }
- 
 
-
-  
-
-
-
+ //did they win
 
 //wins and losses
 
 //show previous word
-previousWordEl.textContent = wordAtPlay
+
 
 //correct and incorrect
