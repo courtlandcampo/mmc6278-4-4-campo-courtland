@@ -61,7 +61,8 @@ function newGame () {
   console.log("reset ready") //working
   var guessCount = 10 //working
   remainingGuesses.textContent = guessCount //working
-  incorrectLettersEl.innerHTML = "" //working
+  incorrectArray = []
+  incorrectLettersEl.textContent = ""
 
   previousWordEl.textContent = wordToGuess.textContent
   
@@ -88,8 +89,9 @@ function newGame () {
         }
         }
       } else {
-      incorrectArray.push(key) //add incorrect letters to array
-      guessCount-- //reduce number of guesses
+        if (incorrectArray.includes(key) === false) {
+          incorrectArray.push(key)
+          guessCount--}
       incorrectLettersEl.textContent = incorrectArray.join(', ') //publish letters to site
       remainingGuesses.textContent = guessCount //publish guesses remaining to site
       }
@@ -129,8 +131,9 @@ document.onkeyup = function game(play) {
       }
       }
     } else {
-      incorrectArray.push(key) //add incorrect letters to array
-      guessCount-- //reduce number of guesses
+      if (incorrectArray.includes(key) === false) {
+        incorrectArray.push(key)
+        guessCount--}
       incorrectLettersEl.textContent = incorrectArray.join(', ') //publish letters to site
       remainingGuesses.textContent = guessCount //publish guesses remaining to site
     }
