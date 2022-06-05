@@ -57,18 +57,62 @@ var victory = false
 
 
 // GAME RESET
-function reset () {
-  console.log("reset ready")
-  var guessCount = 10
-  remainingGuesses.innerHTML = guessCount
-  answerArray = []
-  incorrectLettersEl.innerHTML = ""
-  remainingGuesses = 10
-  Math.random()
+function newGame () {
+  console.log("reset ready") //working
+  var guessCount = 10 //working
+  remainingGuesses.textContent = guessCount //working
+  incorrectLettersEl.innerHTML = "" //working
+  var wordAtPlay = words[Math.floor(Math.random() * words.length)] //re-SELECTS RANDOM WORD
+  console.log(wordAtPlay)
+
+  var answerArray = [] //PLACE TO HOLD UNDERSCORES
+  for (var i = 0; i < wordAtPlay.length; i++) { //REVIEWS LETTERS
+    answerArray[i] = "_"
+  }
+  wordToGuess.textContent = answerArray.join("")
+
+  document.onkeyup = function game(play) {
+    var key = play.key.toLowerCase() //convert keys to lowercase
+  
+    if (wordAtPlay.includes(key)){
+      for (let i = 0; i < wordAtPlay.length; i++) {
+        if (wordAtPlay[i] === key){
+          answerArray[i] = key 
+          wordToGuess.textContent = answerArray.join('') //replace blank w correct letter
+  
+        }
+        }
+      } else {
+        incorrectArray.push(key) //add incorrect letters to array
+        guessCount-- //reduce number of guesses
+        incorrectLettersEl.textContent = incorrectArray //publish letters to site
+        remainingGuesses.textContent = guessCount //publish guesses remaining to site
+      }
+      console.log(answerArray.join(''), wordAtPlay)
+      
+     
+      if (answerArray.join('') === wordAtPlay){
+      console.log("winner, winner chicken dinner!")
+  
+      wins++
+      winsEl.textContent = wins
+  
+      newGame()
+      }
+  
+      if (answerArray.join('') !== wordAtPlay && guessCount < 1) {
+      console.log("haha loser")
+  
+      losses++
+      lossesEl.textContent = losses
+  
+      newGame()
+      }
+  }
 }
 
 // BASIC GAME STRUCTURE
-document.onkeyup = function(play) {
+document.onkeyup = function game(play) {
   var key = play.key.toLowerCase() //convert keys to lowercase
 
   if (wordAtPlay.includes(key)){
@@ -77,7 +121,6 @@ document.onkeyup = function(play) {
         answerArray[i] = key 
         wordToGuess.textContent = answerArray.join('') //replace blank w correct letter
 
-        correctGuesses++
       }
       }
     } else {
@@ -90,10 +133,12 @@ document.onkeyup = function(play) {
     
    
     if (answerArray.join('') === wordAtPlay){
-    console.log("now what did you do?")
+    console.log("winner, winner chicken dinner!")
 
     wins++
     winsEl.textContent = wins
+
+    newGame()
     }
 
     if (answerArray.join('') !== wordAtPlay && guessCount < 1) {
@@ -101,14 +146,7 @@ document.onkeyup = function(play) {
 
     losses++
     lossesEl.textContent = losses
+
+    newGame()
     }
 }
-
- //did they win
-
-//wins and losses
-
-//show previous word
-
-
-//correct and incorrect
